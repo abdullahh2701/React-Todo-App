@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { BiCommentAdd } from "react-icons/bi";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState();
-  const [dueDate, setDueDate] = useState();
+  const [todoName, setTodoName] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const handleNameChange = (event) => {
     setTodoName(event.target.value);
@@ -18,7 +19,7 @@ function AddTodo({ onNewItem }) {
     setTodoName("");
   };
   return (
-    <div className="container text-center">
+    <div className="container ">
       <div className="row n-row">
         <div className="col-6">
           <input
@@ -37,7 +38,7 @@ function AddTodo({ onNewItem }) {
             className="btn btn-success n-button"
             onClick={handleAddButtonClicked}
           >
-            Add
+            <BiCommentAdd />
           </button>
         </div>
       </div>
