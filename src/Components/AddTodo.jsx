@@ -1,47 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BiCommentAdd } from "react-icons/bi";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  // const [todoName, setTodoName] = useState("");
+  // const [dueDate, setDueDate] = useState("");
+  const todoNameElement = useRef();
+  const dueDateElement = useRef();
 
-  const handleNameChange = (event) => {
-    setTodoName(event.target.value);
-  };
+  // const handleNameChange = (event) => {
+  //   setTodoName(event.target.value);
+  // };
 
-  const handleDateChange = (event) => {
-    setDueDate(event.target.value);
-  };
+  // const handleDateChange = (event) => {
+  //   setDueDate(event.target.value);
+  // };
 
-  const handleAddButtonClicked = () => {
+  const handleAddButtonClicked = (event) => {
+    event.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const dueDate = dueDateElement.current.value;
+
+    todoNameElement.current.value = "";
+    dueDateElement.current.value = "";
+
+    console.log(todoName, dueDate);
     onNewItem(todoName, dueDate);
-    setDueDate("");
-    setTodoName("");
+    // setDueDate("");
+    // setTodoName("");
   };
   return (
     <div className="container ">
-      <div className="row n-row">
+      <form onSubmit={handleAddButtonClicked} className="row n-row">
         <div className="col-6">
           <input
             type="text"
+            ref={todoNameElement}
             placeholder="Enter Todo here"
-            value={todoName}
-            onChange={handleNameChange}
+            // value={todoName}
+            // onChange={handleNameChange}
           />
         </div>
         <div className="col-4">
-          <input type="date" value={dueDate} onChange={handleDateChange} />
+          <input
+            ref={dueDateElement}
+            type="date"
+            // value={dueDate}
+            // onChange={handleDateChange}
+          />
         </div>
         <div className="col-2">
-          <button
-            type="button"
-            className="btn btn-success n-button"
-            onClick={handleAddButtonClicked}
-          >
+          <button type="submit" className="btn btn-success n-button">
             <BiCommentAdd />
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
