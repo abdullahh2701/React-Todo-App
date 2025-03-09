@@ -11,11 +11,10 @@ function App() {
   const [todoItems, setTodoItems] = useState([]);
 
   const handleNewItem = (newItem, itemDueDate) => {
-    const newTodoItems = [
-      ...todoItems,
+    setTodoItems((currValue) => [
+      ...currValue,
       { name: newItem, duedate: itemDueDate },
-    ];
-    setTodoItems(newTodoItems);
+    ]);
   };
 
   const handleDeleteItem = (todoItemName) => {
@@ -27,7 +26,7 @@ function App() {
     <center className="todo-container">
       <AppName />
       <AddTodo onNewItem={handleNewItem} />
-      {todoItems.length === 0 && <WelcomeMessage />}
+      <WelcomeMessage todoItems={todoItems} />
       <TodoItems
         todoItems={todoItems}
         onDeleteClick={handleDeleteItem}
