@@ -1,9 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { BiCommentAdd } from "react-icons/bi";
+import { TodoItemsContext } from "../store/todo-items-store";
+function AddTodo() {
+  const { addNewItem } = useContext(TodoItemsContext);
 
-function AddTodo({ onNewItem }) {
   // const [todoName, setTodoName] = useState("");
   // const [dueDate, setDueDate] = useState("");
+
   const todoNameElement = useRef();
   const dueDateElement = useRef();
 
@@ -24,10 +27,11 @@ function AddTodo({ onNewItem }) {
     dueDateElement.current.value = "";
 
     console.log(todoName, dueDate);
-    onNewItem(todoName, dueDate);
+    addNewItem(todoName, dueDate);
     // setDueDate("");
     // setTodoName("");
   };
+
   return (
     <div className="container ">
       <form onSubmit={handleAddButtonClicked} className="row n-row">
